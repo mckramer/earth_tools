@@ -73,7 +73,6 @@ module EarthTools
       #
       def retrieve(query)
         RestClient.proxy = EarthTools::Configuration.proxy if EarthTools::Configuration.proxy
-        #RestClient.proxy = "http://http.proxy.fmr.com:8000"
         puts "Trying to connect to endpoint(#{query})"
         puts "Using proxy (#{RestClient.proxy})" if RestClient.proxy
         RestClient.get query

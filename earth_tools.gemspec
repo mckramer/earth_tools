@@ -1,4 +1,4 @@
-require 'rake'
+﻿require 'rake'
 Gem::Specification.new do |gem|
   gem.name    = "earth_tools"
   gem.version = '0.0.1.alpha'
