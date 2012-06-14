@@ -12,7 +12,7 @@ Gem::Specification.new do |gem|
   gem.description = %q{Client library to query the earthtools.org web services}
   gem.license     = "MIT"
 
-  gem.files = FileList['lib/**/*.rb', 'test/**/*].to_a
+  gem.files = FileList['lib/**/*.rb', 'test/**/*'].to_a
 
   gem.add_runtime_dependency "rest-client", "~> 1.6.1"
   gem.add_runtime_dependency "", "~> 1.6.1"
