@@ -29,30 +29,33 @@ The run down of the 3 major functions available
 ### Time zone
 
     # API
-    result = EarthTools::time_zone(latitude, longitude)
+    result = EarthTools.time_zone(latitude, longitude)
     # Example
-    result = EarthTools::time_zone(40.71417, -74.00639) # New York City
-    result.iso_time # returns "2012-06-14 12:56:40 -0500"
-    result.offset   # returns "-5"
-    result.utc_time # returns "2012-06-14 17:56:40"
+    result = EarthTools.time_zone(40.71417, -74.00639) # New York City
+    result.iso_time # = "2012-06-14 12:56:40 -0500"
+    result.offset   # = -5
+    result.utc_time # = "2012-06-14 17:56:40"
 
 ### Height above/below sea level
 
     # API
-    result = EarthTools::time_zone(latitude, longitude)
+    result = EarthTools.height(latitude, longitude)
     # Example
-    result = EarthTools::time_zone(52.4822/-1.8946) # Birmingham, AL
+    result = EarthTools.height(52.4822, -1.8946) # Birmingham, AL
     result.meters # = 141
     result.feet   # = 462.6
-    result.height # = 462.6 when EarthTools::Configuration is set to english units
+    result.height # = 462.6 when EarthTools::Configuration.units is set to :english units
 
 ### Sunrise/sunset times
 
     # API
-    result = EarthTools::time_zone(latitude, longitude)
+    result = EarthTools.sunrise_sunset(latitude, longitude, day, month, timezone, dst)
     # Example
-    result = EarthTools::sunrise_sunset(40.71417, -74.00639) # New York City
-    result.utc_time # returns ""
+    result = EarthTools.sunrise_sunset(40.71417, -74.00639, 4, 12, -5, 0) # New York City, December 4th
+    result.sunrise        # = Time object
+    result.sunrise.to_s   # = "2012-12-04 07:05:50"
+    result.sunset         # = Time object
+    result.sunset.to_s    # = "2012-12-04 16:26:59"
 
 
 ## Earth Tool API restrictions
