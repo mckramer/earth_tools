@@ -1,11 +1,22 @@
 require 'singleton'
 module EarthTools
+
+  ## This method can be used to change some functional aspects, like,
+  # the geocoding service provider, or the units of calculations.
+  # Please see {include:Configuration}
+  def self.configure(&block)
+    if block_given?
+      block.call(Configuration.instance)
+    else
+      Configuration.instance
+    end
+  end
+  
   class Configuration
     include Singleton
     
     OPTIONS = [
       :timeout,
-      :language,
       :proxy,
       :cache,
       :cache_prefix,
@@ -22,14 +33,13 @@ module EarthTools
     # This method will set the configuration options to the default values
     def set_defaults
       @timeout      = 3               # geocoding service timeout (secs)
-      @language     = :en             # ISO-639 language code
       @proxy        = nil             # HTTP proxy server (user:pass@host:port)
       @cache        = nil             # cache object (must respond to #[], #[]=, and #keys)
       @cache_prefix = "earth_tools:"  # prefix (string) to use for all cache keys
 
       # exceptions that should not be rescued by default
       # (if you want to implement custom error handling);
-      # supports SocketError and Errno::ETIMEDOUT
+      # supports SocketError and Timeout::Error
       @always_raise = []
 
       # calculation options

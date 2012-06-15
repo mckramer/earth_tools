@@ -4,35 +4,38 @@ require 'earth_tools/configuration'
 
 module EarthTools
   module Lookup
+    
+    ##
+    #
+    #
     class Base
       
       ##
       # Query the Earth Tools service and return a EarthTools::Result object.
-      # Returns +nil+ on timeout or error.
-      #
+      # @return [EarthTools::Result, nil] 
       def search(*options)
         begin
           Timeout::timeout(EarthTools::Configuration.timeout) do
             raw_results = retrieve(query(options))
             parse_results(raw_results, :xml)
           end
-        rescue Errno::ETIMEDOUT, Timeout::Error => err
-          raise_error(err) or warn "Earth Tools API took too long to respond. See EarthTools::Configuration to set the timeout time (currently set to #{EarthTools::Configuration.timeout} seconds."
+        rescue Timeout::Error => err
+          raise_error(err) or warn "Earth Tools API took too long to respond. See EarthTools::Configuration to set the timeout time (currently set to #{EarthTools::Configuration.timeout} seconds)."
         end
       end
     
       private
       
       ##
-      # The base url for the web service endpoint (protocol and server)
-      # 
+      # The base URL for the web service endpoint (protocol and server)
+      # @return [String] the base URL
       def base_service_url
         "http://www.earthtools.org"
       end
       
       ##
       # URL to use for querying the geocoding engine.
-      #
+      # @return [String]
       def query(*options)
         base_service_url + query_base + options.join('/')
       end
@@ -90,6 +93,9 @@ module EarthTools
         raise NotImplementedError
       end
       
+      ##
+      #
+      # 
       def result_class
         EarthTools::Result.const_get(self.class.to_s.split(":").last)
       end

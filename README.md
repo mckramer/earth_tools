@@ -10,11 +10,11 @@
 
 Will be testing on other versions in the future.
 
-## Installation
+## Future Installation instructions(not yet published to RubyGems)
 
 Add to your Gemfile:
 
-  `gem "earth_tools"`
+  `gem 'earth_tools'`
 
 and then bundle your gemfile:
 
@@ -32,9 +32,9 @@ The run down of the 3 major functions available
     result = EarthTools.time_zone(latitude, longitude)
     # Example
     result = EarthTools.time_zone(40.71417, -74.00639) # New York City
-    result.iso_time # = "2012-06-14 12:56:40 -0500"
-    result.offset   # = -5
-    result.utc_time # = "2012-06-14 17:56:40"
+    result.iso_time # => "2012-06-14 12:56:40 -0500"
+    result.offset   # => -5
+    result.utc_time # => "2012-06-14 17:56:40"
 
 ### Height above/below sea level
 
@@ -42,20 +42,18 @@ The run down of the 3 major functions available
     result = EarthTools.height(latitude, longitude)
     # Example
     result = EarthTools.height(52.4822, -1.8946) # Birmingham, AL
-    result.meters # = 141
-    result.feet   # = 462.6
-    result.height # = 462.6 when EarthTools::Configuration.units is set to :english units
+    result.meters # => 141
+    result.feet   # => 462.6
+    result.height # => 462.6 when EarthTools::Configuration.units is set to :english units
 
 ### Sunrise/sunset times
 
     # API
-    result = EarthTools.sunrise_sunset(latitude, longitude, day, month, timezone, dst)
+    result = EarthTools.sunrise_sunset(latitude, longitude, month, day, timezone, dst)
     # Example
-    result = EarthTools.sunrise_sunset(40.71417, -74.00639, 4, 12, -5, 0) # New York City, December 4th
-    result.sunrise        # = Time object
-    result.sunrise.to_s   # = "2012-12-04 07:05:50"
-    result.sunset         # = Time object
-    result.sunset.to_s    # = "2012-12-04 16:26:59"
+    result = EarthTools.sunrise_sunset(40.71417, -74.00639, 12, 4, -5, 0) # New York City, December 4th
+    result.sunrise        # => 2012-12-04 06:19:44 +0000
+    result.sunset         # => 2012-12-04 19:33:34 +0000
 
 
 ## Earth Tool API restrictions

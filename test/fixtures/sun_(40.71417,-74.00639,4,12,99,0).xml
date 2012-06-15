@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<sun xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.earthtools.org/sun.xsd">
+  <version>1.0</version>
+  <location>
+    <latitude>40.71417</latitude>
+    <longitude>-74.00639</longitude>
+  </location>
+  <date>
+    <day>4</day>
+    <month>12</month>
+    <timezone>-5</timezone>
+    <dst>0</dst>
+  </date>
+  <morning>
+    <sunrise>07:05:50</sunrise>
+    <twilight>
+      <civil>06:35:06</civil>
+      <nautical>06:00:50</nautical>
+      <astronomical>05:27:39</astronomical>
+    </twilight>
+  </morning>
+  <evening>
+    <sunset>16:26:59</sunset>
+    <twilight>
+      <civil>16:57:43</civil>
+      <nautical>17:31:59</nautical>
+      <astronomical>18:05:10</astronomical>
+    </twilight>
+  </evening>
+</sun>

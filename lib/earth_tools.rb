@@ -8,7 +8,7 @@ module EarthTools
   ##
   # Retrieve for time zone based on latitude and longitude.
   #
-  # @returns EarthTools::Result::TimeZone
+  # @returns [EarthTools::Result::TimeZone]
   #
   def time_zone(latitude, longitude)
     get_lookup(:time_zone).search(latitude, longitude) if valid_input?(latitude, longitude)
@@ -17,30 +17,19 @@ module EarthTools
   ##
   # Retrieve the sunrise & sunset values
   #
-  # @returns EarthTools::Result::SunriseSunset
+  # @returns [EarthTools::Result::SunriseSunset]
   #
-  def sunrise_sunset(latitude, longitude, day, month, timezone, dst)
-    get_lookup(:sunrise_sunset).search(latitude, longitude, day, month, timezone, dst)
+  def sunrise_sunset(latitude, longitude, month, day, timezone = 99, dst = false)
+    get_lookup(:sunrise_sunset).search(latitude, longitude, day, month, timezone, dst ? 1 : 0)
   end
   
   ##
   # Retrieve the land height for a given latitude and longitude
   # 
-  # @returns EarthTools::Result::Height
+  # @returns [EarthTools::Result::Height]
   #
   def height(latitude, longitude)
     get_lookup(:height).search(latitude, longitude)
-  end
-  
-  ## This method can be used to change some functional aspects, like,
-  # the geocoding service provider, or the units of calculations.
-  # Please see {include:Configuration}
-  def configure(&block)
-    if block_given?
-      module_eval(&block)
-    else
-      Configuration.instance
-    end
   end
   
   private

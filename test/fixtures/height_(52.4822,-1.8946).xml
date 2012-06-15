@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<height xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.earthtools.org/height.xsd">
+  <version>1.0</version>
+  <location>
+    <latitude>52.4822</latitude>
+    <longitude>-1.8946</longitude>
+  </location>
+  <meters>141</meters>
+  <feet>462.6</feet>
+</height>
