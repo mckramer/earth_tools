@@ -20,7 +20,7 @@ module EarthTools::Result
     end
   
     def offset
-      @data['offset']
+      @data['offset'].to_i
     end
 
     def suffix

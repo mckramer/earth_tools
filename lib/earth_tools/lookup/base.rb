@@ -12,11 +12,12 @@ module EarthTools
       #
       def search(*options)
         begin
-          raw_results = retrieve(query(options))
-          parse_results(raw_results, :xml)
-        rescue Errno::ETIMEDOUT => err
-          raise_error(err) or warn "Earth Tools API took too long to respond. " 
-            + "See EarthTools::Configuration to set the timeout time (currently set to #{EarthTools::Configuration.timeout} seconds."
+          Timeout::timeout(EarthTools::Configuration.timeout) do
+            raw_results = retrieve(query(options))
+            parse_results(raw_results, :xml)
+          end
+        rescue Errno::ETIMEDOUT, Timeout::Error => err
+          raise_error(err) or warn "Earth Tools API took too long to respond. See EarthTools::Configuration to set the timeout time (currently set to #{EarthTools::Configuration.timeout} seconds."
         end
       end
     
@@ -26,15 +27,7 @@ module EarthTools
       # The base url for the web service endpoint (protocol and server)
       # 
       def base_service_url
-        "#{protocol}://www.earthtools.org"
-      end
-      
-      ##
-      # Protocol to use for communication with geocoding services.
-      # Set in configuration but not available for every service.
-      #
-      def protocol
-        "http" + (EarthTools::Configuration.secure ? "s" : "")
+        "http://www.earthtools.org"
       end
       
       ##
@@ -50,7 +43,7 @@ module EarthTools
       def parse_results(raw_results, type)
         case type
         when :xml
-          parse_xml(XmlSimple.xml_in(raw_results))
+          parse_xml(XmlSimple.xml_in( raw_results, { 'ForceArray' => false } ))
         when :json
           raise UnsupportedOperationError, "JSON is not supported"
         end
@@ -73,8 +66,8 @@ module EarthTools
       #
       def retrieve(query)
         RestClient.proxy = EarthTools::Configuration.proxy if EarthTools::Configuration.proxy
-        puts "Trying to connect to endpoint(#{query})"
-        puts "Using proxy (#{RestClient.proxy})" if RestClient.proxy
+        #puts "Trying to connect to endpoint(#{query})"
+        #puts "Using proxy (#{RestClient.proxy})" if RestClient.proxy
         RestClient.get query
       end
       

@@ -29,7 +29,7 @@ module EarthTools
   # @returns EarthTools::Result::Height
   #
   def height(latitude, longitude)
-    get_lookup(:time_zone).search(latitude, longitude)
+    get_lookup(:height).search(latitude, longitude)
   end
   
   ## This method can be used to change some functional aspects, like,

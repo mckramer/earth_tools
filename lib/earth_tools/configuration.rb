@@ -6,7 +6,6 @@ module EarthTools
     OPTIONS = [
       :timeout,
       :language,
-      :secure,
       :proxy,
       :cache,
       :cache_prefix,
@@ -24,7 +23,6 @@ module EarthTools
     def set_defaults
       @timeout      = 3               # geocoding service timeout (secs)
       @language     = :en             # ISO-639 language code
-      @secure       = false           # use HTTPS for lookup requests? (if supported)
       @proxy        = nil             # HTTP proxy server (user:pass@host:port)
       @cache        = nil             # cache object (must respond to #[], #[]=, and #keys)
       @cache_prefix = "earth_tools:"  # prefix (string) to use for all cache keys

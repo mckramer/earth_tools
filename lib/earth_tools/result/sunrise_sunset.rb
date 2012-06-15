@@ -4,7 +4,7 @@ module EarthTools::Result
   class SunriseSunset < Base
   
     def date
-      { :year => @data['date']['year'], :month => @data['date']['month'], :day => @data['date']['day'] }
+      { :year => Time.now.year, :month => @data['date']['month'], :day => @data['date']['day'] }
     end
 
     ##
@@ -37,14 +37,14 @@ module EarthTools::Result
     end
     
     def utc_offset
-      @data['date']['timezone']
+      @data['date']['timezone'].to_i
     end
     
     private 
     
     def create_time(time)
-      times = time.split(':')
-      Time.new(date.year, date.month, date.day, times[0], times[1], times[2], utc_offset)
+      times = time.split(':').collect{|s| s.to_i}
+      Time.new(date[:year], date[:month], date[:day], times[0], times[1], times[2], utc_offset)
     end
     
   end
