@@ -33,46 +33,10 @@ module EarthTools::Result
     # @param [Symbol]
     # @param [Symbol]
     # @return [Time]
-    def twilight(morning_or_evening, type)
-      morning_or_evening = morning_or_evening.to_sym if morning_or_evening.is_a?(String)
-      case morning_or_evening
-      when :morning
-        morning_twilight type
-      when :evening
-        evening_twilight type
-      end    
-    end
-    
-    ##
-    # The evening twilight 
-    # @param [Symbol]
-    # @return [Time]
-    def evening_twilight(type)
-      type = type.to_sym if type.is_a?(String) # Convert type to symbol if it is a string
-      case type
-      when :astronomical 
-        evening_astronomical_twilight
-      when :civil 
-        evening_civil_twilight
-      when :nautical 
-        evening_nautical_twilight
-      end
-    end
-    
-    ##
-    # The morning twilight 
-    # @param [Symbol]
-    # @return [Time]
-    def morning_twilight(type)
-      type = type.to_sym if type.is_a?(String) # Convert type to symbol if it is a string
-      case type
-      when :astronomical 
-        morning_astronomical_twilight
-      when :civil 
-        morning_civil_twilight
-      when :nautical 
-        morning_nautical_twilight
-      end
+    def twilight(time, type)
+      time = time.to_sym if time.is_a?(String)
+      type = type.to_sym if type.is_a?(String)
+      send "#{time}_#{type}_twilight" if [:morning, :evening].include?(time) && [:astronomical, :civil, :nautical].include?(type)
     end
     
     def evening_astronomical_twilight
