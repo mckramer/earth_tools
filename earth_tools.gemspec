@@ -13,8 +13,6 @@ Gem::Specification.new do |gem|
   gem.license     = "MIT"
 
   gem.files = FileList['lib/**/*.rb', 'test/**/*'].to_a
-
   gem.add_runtime_dependency "rest-client", "~> 1.6.1"
   
-  gem.add_development_dependency 'rake'
 end
