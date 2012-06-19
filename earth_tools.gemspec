@@ -1,4 +1,4 @@
-﻿require 'rake'
+﻿require 'rake/file_list'
 require './lib/earth_tools/version'
 
 Gem::Specification.new do |gem|
@@ -14,5 +14,6 @@ Gem::Specification.new do |gem|
 
   gem.files = FileList['lib/**/*.rb', 'test/**/*'].to_a
   gem.add_runtime_dependency "rest-client", "~> 1.6.1"
+  gem.add_runtime_dependency "xml-simple", "~> 1.1.1"
   
 end
