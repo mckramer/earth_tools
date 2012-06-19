@@ -31,16 +31,16 @@ module EarthTools::Result
     ##
     # The same value as {#local_time} but in ISO 8601 format instead
     # See {http://en.wikipedia.org/wiki/ISO_8601}.
-    # @return [Time] the ISO time
+    # @return [String] the ISO time
     def iso_time
-      @data['isotime']
+      create_time @data['isotime']
     end
     
     ##
     # The local time taking into account the time zone offset and any local daylight saving time in effect
-    # @return [Time] the local time
+    # @return [String] the local time
     def local_time
-      @data['localtime']
+      iso_time
     end
   
     ##
@@ -62,9 +62,16 @@ module EarthTools::Result
     ##
     # The reference UTC time
     # See {http://en.wikipedia.org/wiki/Coordinated_Universal_Time}.
-    # @return [Time] the UTC time
+    # @return [String] the UTC time
     def utc_time
-      @data['utctime']
+      create_time @data['utctime'], "%Y-%m-%d %H:%M:%S"
+    end
+    
+    private
+    
+    def create_time(time, format = "%Y-%m-%d %H:%M:%S %z")
+      require 'date'
+      DateTime.strptime(time, format).to_time
     end
     
   end

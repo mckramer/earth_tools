@@ -10,7 +10,7 @@
 
 Will be testing on other versions in the future.
 
-## Future Installation instructions(not yet published to RubyGems)
+## *Future Installation instructions (not yet published released to RubyGems)*
 
 Add to your Gemfile:
 
@@ -32,9 +32,9 @@ The run down of the 3 major functions available
     result = EarthTools.time_zone(latitude, longitude)
     # Example
     result = EarthTools.time_zone(40.71417, -74.00639) # New York City
-    result.iso_time # => "2012-06-14 12:56:40 -0500"
-    result.offset   # => -5
-    result.utc_time # => "2012-06-14 17:56:40"
+    result.iso_time   # => 2012-06-14 12:56:40 -0500
+    result.utc_offset # => -5
+    result.utc_time   # => 2012-06-14 17:56:40 +0000
 
 ### Height above/below sea level
 
@@ -44,7 +44,7 @@ The run down of the 3 major functions available
     result = EarthTools.height(52.4822, -1.8946) # Birmingham, AL
     result.meters # => 141
     result.feet   # => 462.6
-    result.height # => 462.6 when EarthTools::Configuration.units is set to :english units
+    result.height # => 462.6 (when EarthTools::Configuration.units is set to :english units)
 
 ### Sunrise/sunset times
 
@@ -52,8 +52,8 @@ The run down of the 3 major functions available
     result = EarthTools.sunrise_sunset(latitude, longitude, month, day, timezone, dst)
     # Example
     result = EarthTools.sunrise_sunset(40.71417, -74.00639, 12, 4, -5, 0) # New York City, December 4th
-    result.sunrise        # => 2012-12-04 06:19:44 +0000
-    result.sunset         # => 2012-12-04 19:33:34 +0000
+    result.sunrise     # => 2012-12-04 07:05:50 -0500
+    result.sunset      # => 2012-12-04 16:26:59 -0500
 
 
 ## Earth Tool API restrictions
@@ -66,11 +66,11 @@ Earth Tools imposes some [usage restrictions](http://www.earthtools.org/webservi
 2. You *must* cache results if you believe that you will need to make another identical request within any 24-hour period.
 3. You *must* delete any cached data when you no longer need it and in any case after 14 days. You should then make a new request for the data in line with the previous two rules. If you wish to keep access to data I am able to license the data for use in this way.
 
-### Caching
+### Caching (*TBD update this section*)
 
 It's a good idea, when relying on any external service, to cache retrieved data. When implemented correctly it improves your app's response time and stability. It's easy to cache geocoding results with Geocoder, just configure a cache store:
 
-  EarthTools::Configuration.cache = Redis.new
+    EarthTools::Configuration.cache = Redis.new
 
 This example uses Redis, but the cache store can be any object that supports these methods:
 
@@ -82,14 +82,14 @@ Even a plain Ruby hash will work, though it's not a great choice (cleared out wh
 
 You can also set a custom prefix to be used for cache keys:
 
-  EarthTools::Configuration.cache_prefix = "..."
+    EarthTools::Configuration.cache_prefix = "..."
 
 By default the prefix is `earth_tools:`
 
 If you need to expire cached content:
 
-  EarthTools.cache.expire("http://...") # expire cached result for a URL
-  EarthTools.cache.expire(:all)         # expire all cached results
+    EarthTools.cache.expire("http://...") # expire cached result for a URL
+    EarthTools.cache.expire(:all)         # expire all cached results
 
 Do *not* include the prefix when passing a URL to be expired. Expiring `:all` will only expire keys with the configured prefix (won't kill every entry in your key/value store).
 
@@ -97,7 +97,7 @@ Do *not* include the prefix when passing a URL to be expired. Expiring `:all` wi
 
 By default Earth Tools will rescue any exceptions raised by calls to the geocoding service and return an empty array (using warn() to inform you of the error). You can override this and implement custom error handling for certain exceptions by using the `:always_raise` option:
 
-  EarthTools::Configuration.always_raise = [SocketError, TimeoutError]
+    EarthTools::Configuration.always_raise = [SocketError, TimeoutError]
 
 ## Known issues
 

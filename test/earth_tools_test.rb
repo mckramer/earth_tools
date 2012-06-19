@@ -10,15 +10,15 @@ require 'mock_lookup'
 class EarthToolsTest < MiniTest::Unit::TestCase
   
   def test_time_zone_method_returns_result_object
-    EarthTools.time_zone(40.71417, -74.00639).is_a? EarthTools::Result::TimeZone
+    assert EarthTools.time_zone(40.71417, -74.00639).is_a?(EarthTools::Result::TimeZone)
   end
   
   def test_sunrise_sunset_method_returns_result_object
-    EarthTools.sunrise_sunset(40.71417, -74.00639, 12, 4).is_a? EarthTools::Result::SunriseSunset
+    assert EarthTools.sunrise_sunset(40.71417, -74.00639, 12, 4).is_a?(EarthTools::Result::SunriseSunset)
   end
   
   def test_height_method_returns_result_object
-    EarthTools.height(52.4822, -1.8946).is_a? EarthTools::Result::Height
+    assert EarthTools.height(52.4822, -1.8946).is_a?(EarthTools::Result::Height)
   end
   
 end
