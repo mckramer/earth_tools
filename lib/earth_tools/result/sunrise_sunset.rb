@@ -109,7 +109,7 @@ module EarthTools::Result
     
     ##
     # Parses time
-    # @returns [Time]
+    # @returns [Time] The parse time
     def create_time(time)
       times = time.split(':').collect{|s| s.to_i}
       Time.new(date[:year], date[:month], date[:day], times[0], times[1], times[2], utc_offset * 3600)
