@@ -10,7 +10,7 @@
 
 Will be testing on other versions in the future.
 
-## *Future Installation instructions (not yet published released to RubyGems)*
+## Installation instructions
 
 Add to your Gemfile:
 
@@ -55,12 +55,24 @@ The run down of the 3 major functions available
     result.sunrise     # => 2012-12-04 07:05:50 -0500
     result.sunset      # => 2012-12-04 16:26:59 -0500
 
+### Configuration
+
+    # Configure block (set to defaults)
+    EarthTools.configure do |config|
+      config.always_raise = []              # Add any errors that you would like to be custom handled, see "Error handling" section below
+      config.cache = nil                    # Cache object (must respond to #[], #[]=, and #keys)
+      config.cache_prefix = "earth_tools:"   # Prefix to all cache keys
+      config.timeout = 3                    # Timeout in seconds
+      config.units = :english               # Also, can specify :metric
+    end
+    # Static call
+    EarthTools::Configuration.timeout = 5   # Set timeout to 5 seconds
 
 ## Earth Tool API restrictions
 
 ### Limits
 
-Earth Tools imposes some [usage restrictions](http://www.earthtools.org/webservices.htm#usage) that are copies below (these restrictions may be out of date, so please check the website):
+Earth Tools imposes some [usage restrictions](http://www.earthtools.org/webservices.htm#usage) that are duplicated below (these restrictions may not be kept up-to-date, so please check the website):
 
 1. You *must not* make more than 1 (one) request per second to these webservices.
 2. You *must* cache results if you believe that you will need to make another identical request within any 24-hour period.
@@ -68,15 +80,23 @@ Earth Tools imposes some [usage restrictions](http://www.earthtools.org/webservi
 
 ### Caching (*TBD update this section*)
 
-It's a good idea, when relying on any external service, to cache retrieved data. When implemented correctly it improves your app's response time and stability. It's easy to cache geocoding results with Geocoder, just configure a cache store:
+It is recommended to cache retrieved data when relying on an external service. You can configure a cache store:
 
     EarthTools::Configuration.cache = Redis.new
 
-This example uses Redis, but the cache store can be any object that supports these methods:
+The cache store can be any object that supports the following methods:
 
-* `store#[](key)`         - retrieves a value
-* `store#[]=(key, value)` - stores a value
-* `store#keys`            - lists all keys
+<table>
+    <tr>
+        <td>`store#[](key)`</td><td>retrieves a value</td>
+    </tr>
+    <tr>
+        <td>`store#[]=(key, value)`</td><td>stores a value</td>
+    </tr>
+    <tr>
+        <td>`store#keys`</td><td>lists all keys</td>
+    </tr>
+</table>
 
 Even a plain Ruby hash will work, though it's not a great choice (cleared out when app is restarted, not shared between app instances, etc).
 
@@ -95,17 +115,17 @@ Do *not* include the prefix when passing a URL to be expired. Expiring `:all` wi
 
 ## Error handling
 
-By default Earth Tools will rescue any exceptions raised by calls to the geocoding service and return an empty array (using warn() to inform you of the error). You can override this and implement custom error handling for certain exceptions by using the `:always_raise` option:
+By default Earth Tools will rescue any exceptions raised by calls to the webservice and return an empty array (using warn() to inform you of the error). You can override this and implement custom error handling for certain exceptions by using the `:always_raise` option:
 
     EarthTools::Configuration.always_raise = [SocketError, TimeoutError]
 
-## Known issues
+## Issues & contributing
 
-None, right now.  Please post any issues to the [issues queue on github](https://github.com/mckramer/earth_tools/issues).
+No outstanding issues right now.  Please post any issues to the [issues queue on github](https://github.com/mckramer/earth_tools/issues).
 
 ## Future
 
-I would love to see this functionality brought into the `geocoder` gem in the future.
+I would love to see this functionality brought into the `geocoder` gem or similar in the future.
 
 # License and attributions
 
