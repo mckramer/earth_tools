@@ -22,13 +22,13 @@ module EarthTools
     # Read from the cache.
     # @return the object saved in the cache
     def [](url)
-      store[key_for(url)]
+      @store[key_for(url)]
     end
  
     ##
     # Write to the cache.
     def []=(url, value)
-      store[key_for(url)] = value
+      @store[key_for(url)] = value
     end
  
     ##
@@ -38,7 +38,7 @@ module EarthTools
       if url == :all
         urls.each{ |u| expire(u) }
       else
-        store.del(key_for(url))
+        @store.send(@store.respond_to?(:del) ? :del : :delete, key_for(url))
       end
     end
  
@@ -51,7 +51,7 @@ module EarthTools
     # Cache key for a given URL.
     # @return [String] the cache key
     def key_for(url)
-      [prefix, url].join
+      [@prefix, url].join
     end
  
     ##
@@ -59,14 +59,14 @@ module EarthTools
     # that have non-nil values.
     # @return [Array] the list of keys
     def keys
-      store.keys.select{ |k| k.match /^#{prefix}/ and cleave(store[k]) }
+      @store.keys.select{ |k| k.match /^#{@prefix}/ and cleave(@store[k]) }
     end
  
     ##
     # Array of cached URLs.
     # @return [Array] the list of cached URLs
     def urls
-      keys.map{ |k| k[/^#{prefix}(.*)/, 1] }
+      keys.map{ |k| k[/^#{@prefix}(.*)/, 1] }
     end
  
     ##
