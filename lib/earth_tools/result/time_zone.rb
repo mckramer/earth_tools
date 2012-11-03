@@ -3,8 +3,9 @@ require 'earth_tools/result/base'
 module EarthTools::Result
   
   ##
+  # The Time Zone result.
   #
-  #
+  # @see http://www.earthtools.org/webservices.htm#timezone
   class TimeZone < Base
 
     ##

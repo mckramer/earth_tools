@@ -3,7 +3,7 @@ require 'earth_tools/result/base'
 module EarthTools::Result
 
   ##
-  # The sunrise/sunset result object
+  # The sunrise/sunset result.
   #
   class SunriseSunset < Base
   

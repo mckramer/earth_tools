@@ -78,40 +78,36 @@ Earth Tools imposes some [usage restrictions](http://www.earthtools.org/webservi
 2. You *must* cache results if you believe that you will need to make another identical request within any 24-hour period.
 3. You *must* delete any cached data when you no longer need it and in any case after 14 days. You should then make a new request for the data in line with the previous two rules. If you wish to keep access to data I am able to license the data for use in this way.
 
-### Caching (*TBD update this section*)
+### Caching (*Future feature*)
 
 It is recommended to cache retrieved data when relying on an external service. You can configure a cache store:
 
     EarthTools::Configuration.cache = Redis.new
+    EarthTools::Configuration.cache_prefix = "..." # Provide a custom cache prefix, defaults to 'earth_tools:'
 
 The cache store can be any object that supports the following methods:
 
 <table>
     <tr>
-        <td>`store#[](key)`</td><td>retrieves a value</td>
+        <th>Method</th><th>Description</th><th>Examples</th>
     </tr>
     <tr>
-        <td>`store#[]=(key, value)`</td><td>stores a value</td>
+        <td><code>store#[](key)</code></td><td>Retrieves a value by with the key</td><td></td>
     </tr>
     <tr>
-        <td>`store#keys`</td><td>lists all keys</td>
+        <td><code>store#[]=(key, value)</code></td><td>Stores a value with the key</td><td></td>
+    </tr>
+    <tr>
+        <td><code>store#keys</code></td><td>Retrieves all keys</td><td></td>
     </tr>
 </table>
 
-Even a plain Ruby hash will work, though it's not a great choice (cleared out when app is restarted, not shared between app instances, etc).
-
-You can also set a custom prefix to be used for cache keys:
-
-    EarthTools::Configuration.cache_prefix = "..."
-
-By default the prefix is `earth_tools:`
-
 If you need to expire cached content:
 
-    EarthTools.cache.expire("http://...") # expire cached result for a URL
-    EarthTools.cache.expire(:all)         # expire all cached results
+    EarthTools.cache.expire("http://...") # Expire cached result for a URL
+    EarthTools.cache.expire(:all)         # Expire all cached results
 
-Do *not* include the prefix when passing a URL to be expired. Expiring `:all` will only expire keys with the configured prefix (won't kill every entry in your key/value store).
+There is no need to include the prefix when passing a URL to be expired. Expiring `:all` will only expire keys with the configured prefix (won't kill every entry in your key/value store).
 
 ## Error handling
 
