@@ -6,7 +6,7 @@
 
 ## Compatibility
 
-* Supports Ruby 1.9.3
+* Supports Ruby 1.9.2 & 1.9.3
 
 Will be testing on other versions in the future.
 
