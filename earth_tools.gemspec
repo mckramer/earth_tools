@@ -1,4 +1,4 @@
-﻿require 'rake'
+require 'rake'
 require './lib/earth_tools/version'
 
 Gem::Specification.new do |gem|
