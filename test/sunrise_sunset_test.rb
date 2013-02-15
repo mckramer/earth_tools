@@ -20,7 +20,7 @@ class SunriseSunsetTest < MiniTest::Unit::TestCase
   end
   
   def test_sunrise_parsed_correctly
-    assert_equal Time.new(2012, 12, 4, 7, 5, 50, '-05:00'), @result.sunrise, 'Sunrise was not parsed correctly'
+    assert_equal Time.new(Time.now.year, 12, 4, 7, 5, 50, '-05:00'), @result.sunrise, 'Sunrise was not parsed correctly'
   end
   
   # ---------------------------------------------------------------------------
@@ -32,7 +32,7 @@ class SunriseSunsetTest < MiniTest::Unit::TestCase
   end
   
   def test_sunset_parsed_correctly
-    assert_equal Time.new(2012, 12, 4, 16, 26, 59, '-05:00'), @result.sunset, 'Sunset was not parsed correctly'
+    assert_equal Time.new(Time.now.year, 12, 4, 16, 26, 59, '-05:00'), @result.sunset, 'Sunset was not parsed correctly'
   end
   
   # ---------------------------------------------------------------------------
@@ -49,12 +49,13 @@ class SunriseSunsetTest < MiniTest::Unit::TestCase
   end
   
   def test_twilight_parsed_correctly
-    assert_equal Time.new(2012, 12, 4, 5, 27, 39, '-05:00'), @result.twilight(:morning, :astronomical), 'Twilight was not parsed correctly'
-    assert_equal Time.new(2012, 12, 4, 6, 35, 6, '-05:00'), @result.twilight(:morning, :civil), 'Twilight was not parsed correctly'
-    assert_equal Time.new(2012, 12, 4, 6, 0, 50, '-05:00'), @result.twilight(:morning, :nautical), 'Twilight was not parsed correctly'
-    assert_equal Time.new(2012, 12, 4, 18, 5, 10, '-05:00'), @result.twilight(:evening, :astronomical), 'Twilight was not parsed correctly'
-    assert_equal Time.new(2012, 12, 4, 16, 57, 43, '-05:00'), @result.twilight(:evening, :civil), 'Twilight was not parsed correctly'
-    assert_equal Time.new(2012, 12, 4, 17, 31, 59, '-05:00'), @result.twilight(:evening, :nautical), 'Twilight was not parsed correctly'
+    year = Time.now.year
+    assert_equal Time.new(year, 12, 4, 5, 27, 39, '-05:00'), @result.twilight(:morning, :astronomical), 'Twilight was not parsed correctly'
+    assert_equal Time.new(year, 12, 4, 6, 35, 6, '-05:00'), @result.twilight(:morning, :civil), 'Twilight was not parsed correctly'
+    assert_equal Time.new(year, 12, 4, 6, 0, 50, '-05:00'), @result.twilight(:morning, :nautical), 'Twilight was not parsed correctly'
+    assert_equal Time.new(year, 12, 4, 18, 5, 10, '-05:00'), @result.twilight(:evening, :astronomical), 'Twilight was not parsed correctly'
+    assert_equal Time.new(year, 12, 4, 16, 57, 43, '-05:00'), @result.twilight(:evening, :civil), 'Twilight was not parsed correctly'
+    assert_equal Time.new(year, 12, 4, 17, 31, 59, '-05:00'), @result.twilight(:evening, :nautical), 'Twilight was not parsed correctly'
   end
   
   # ---------------------------------------------------------------------------
@@ -73,8 +74,8 @@ class SunriseSunsetTest < MiniTest::Unit::TestCase
     assert @result.morning_astronomical_twilight.is_a?(Time), 'Morning astronomical twilight should be a time'
   end
   
-  def test_twilight_parsed_correctly
-    assert_equal Time.new(2012, 12, 4, 5, 27, 39, '-05:00'), @result.morning_astronomical_twilight, 'Twilight was not parsed correctly'
+  def test_morning_astronomical_twilight_parsed_correctly
+    assert_equal Time.new(Time.now.year, 12, 4, 5, 27, 39, '-05:00'), @result.morning_astronomical_twilight, 'Twilight was not parsed correctly'
   end
   
   # ---------------------------------------------------------------------------
