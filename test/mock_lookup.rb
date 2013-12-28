@@ -1,6 +1,10 @@
 require 'earth_tools/lookup/base'
-class EarthTools::Lookup::Base
 
+##
+# Mock Lookup class.
+# Overrides normal lookup base for testing.
+class EarthTools::Lookup::Base
+  
   private
   
   def read_fixture(file)
@@ -14,5 +18,5 @@ class EarthTools::Lookup::Base
     query = query.split('/')
     read_fixture "#{ query[3] }_(#{ query[4, query.size-1].join(',') }).xml"
   end
-
+  
 end

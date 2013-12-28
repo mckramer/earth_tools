@@ -2,25 +2,27 @@ module EarthTools
   module Result
   
     ##
-    #
+    # The base result object.
+    # 
+    # Contains shared domain fields.  Extended by different results.
     #
     class Base
       attr_accessor :data
-
+      
       ##
       # Takes a hash of result data from a parsed Google result document.
       # @param [Object] the 
       def initialize(data)
         @data = data
       end
-
+      
       ##
       # Get the geographical location
       # @return [Array] a two-element array: [latitude, longitude]
       def location
         [latitude, longitude]
       end
-
+      
       ##
       # Get the latitude
       # See {http://en.wikipedia.org/wiki/Latitude}.
@@ -28,7 +30,7 @@ module EarthTools
       def latitude
         @data['latitude'].to_f
       end
-
+      
       ##
       # Get the longitude
       # See {http://en.wikipedia.org/wiki/Longitude}.
@@ -43,7 +45,7 @@ module EarthTools
       def version
         @data['version'].to_f
       end
-
+      
     end
   end
 end

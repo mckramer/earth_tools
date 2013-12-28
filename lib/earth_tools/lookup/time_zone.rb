@@ -7,15 +7,9 @@ module EarthTools::Lookup
   # The Time Zone lookup.
   #
   class TimeZone < Base
-
-    #class << self
-    #  def function
-    #    @function ||= 'timezone'
-    #  end
-    #end
-
+    
     private
-
+    
     def query_base
       "/timezone/"
     end

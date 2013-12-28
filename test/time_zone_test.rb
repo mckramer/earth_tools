@@ -5,8 +5,10 @@ require 'earth_tools'
 require 'earth_tools/result/time_zone'
 require 'mock_lookup'
 
+##
+# Tests for Time Zone lookups.
 class TimeZoneTest < MiniTest::Unit::TestCase
-
+  
   def setup
     @result = EarthTools.time_zone(40.71417, -74.00639)
   end

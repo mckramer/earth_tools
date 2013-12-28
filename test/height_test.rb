@@ -6,8 +6,7 @@ require 'earth_tools/result/height'
 require 'mock_lookup'
 
 ##
-#
-#
+# Tests for height lookups.
 class HeightTest < MiniTest::Unit::TestCase
 
   def setup

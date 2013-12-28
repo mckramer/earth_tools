@@ -1,6 +1,5 @@
 ﻿# earth_tools
-
-[![Build Status](https://secure.travis-ci.org/mckramer/earth_tools.png?branch=master)](http://travis-ci.org/mckramer/earth_tools) [![Dependency Status](https://gemnasium.com/mckramer/earth_tools.png?travis)](https://gemnasium.com/mckramer/earth_tools) [![Code Climate](https://codeclimate.com/github/mckramer/earth_tools.png)](https://codeclimate.com/github/mckramer/earth_tools)
+[![Gem Version](https://badge.fury.io/rb/earth_tools.png)](http://badge.fury.io/rb/earth_tools) [![Dependency Status](https://gemnasium.com/mckramer/earth_tools.png?travis)](https://gemnasium.com/mckramer/earth_tools) [![Code Climate](https://codeclimate.com/github/mckramer/earth_tools.png)](https://codeclimate.com/github/mckramer/earth_tools) [![Build Status](https://secure.travis-ci.org/mckramer/earth_tools.png?branch=master)](http://travis-ci.org/mckramer/earth_tools)
 
 `earth_tools` is a wrapper around the wonderful [earthtools.org webservices](http://www.earthtools.org/webservices.htm), which allows you to determine the sea level height, time zone, and surise/sunset times from a set of coordinates.
 

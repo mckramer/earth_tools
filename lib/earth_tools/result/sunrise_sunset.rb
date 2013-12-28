@@ -4,16 +4,15 @@ module EarthTools::Result
 
   ##
   # The sunrise/sunset result.
-  #
   class SunriseSunset < Base
-  
+    
     ##
     # The date of the sunrise/sunset data as a hash
     # @return [Hash] Hash containing year, month, and day as integers
     def date
       { :year => Time.now.year, :month => @data['date']['month'].to_i, :day => @data['date']['day'].to_i }
     end
-
+    
     ##
     # The sunrise time
     # @return [Time] the sunrise time

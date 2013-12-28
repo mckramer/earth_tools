@@ -32,7 +32,7 @@ module EarthTools
           raise_error(err) or warn "Earth Tools API took too long to respond. See EarthTools::Configuration to set the timeout time (currently set to #{EarthTools::Configuration.timeout} seconds)."
         end
       end
-    
+      
       private
       
       ##
@@ -41,7 +41,7 @@ module EarthTools
       def base_service_url
         "http://www.earthtools.org"
       end
-
+      
       ##
       # Gets the cache.
       # @return [EarthTools::Cache] the cache

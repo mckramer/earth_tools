@@ -5,8 +5,10 @@ require 'earth_tools'
 require 'earth_tools/result/sunrise_sunset'
 require 'mock_lookup'
 
+##
+# Tests for Sunrise/Sunset lookups.
 class SunriseSunsetTest < MiniTest::Unit::TestCase
-
+  
   def setup
     @result = EarthTools.sunrise_sunset(40.71417, -74.00639, 12, 4)
   end
@@ -83,7 +85,7 @@ class SunriseSunsetTest < MiniTest::Unit::TestCase
   # ---------------------------------------------------------------------------
   
   def test_utc_offset_is_integer
-	assert @result.utc_offset.is_a?(Integer), 'UTC offset should be an integer'
+    assert @result.utc_offset.is_a?(Integer), 'UTC offset should be an integer'
   end
   
   def test_utc_offset_parsed_correctly

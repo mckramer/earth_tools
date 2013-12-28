@@ -7,7 +7,7 @@ module EarthTools::Result
   #
   # @see http://www.earthtools.org/webservices.htm#timezone
   class TimeZone < Base
-
+    
     ##
     # Whether or not the {#local_time} and {#iso_time} is currently in DST. If they do, the value of this element will be 'True'. If they do not, the value will be 'False'. If it can't be determined whether or not daylight saving time should be used, the value will be 'Unknown'. 
     # @return [String] 'True' || 'False' || 'Unknown'
@@ -43,7 +43,7 @@ module EarthTools::Result
     def local_time
       iso_time
     end
-  
+    
     ##
     # The number of hours offset from UTC disregarding any correction for daylight saving time
     # See {http://en.wikipedia.org/wiki/UTC_offset}.
@@ -51,7 +51,7 @@ module EarthTools::Result
     def utc_offset
       @data['offset'].to_i
     end
-
+    
     ##
     # The nautical suffix for the time zone
     # See {http://en.wikipedia.org/wiki/Nautical_time}

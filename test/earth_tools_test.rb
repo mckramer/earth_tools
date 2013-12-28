@@ -7,6 +7,8 @@ require 'earth_tools/result/sunrise_sunset'
 require 'earth_tools/result/time_zone'
 require 'mock_lookup'
 
+##
+# Tests for module static methods.
 class EarthToolsTest < MiniTest::Unit::TestCase
   
   def test_time_zone_method_returns_result_object

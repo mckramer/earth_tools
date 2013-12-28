@@ -1,9 +1,10 @@
 require 'singleton'
 module EarthTools
 
-  ## This method can be used to change some functional aspects, like,
-  # the geocoding service provider, or the units of calculations.
-  # Please see {include:Configuration}
+  ##
+  # This method can be used to change some functional aspects, like
+  # the cache client or the units of calculations.
+  # See {include:Configuration}.
   def self.configure(&block)
     if block_given?
       block.call(Configuration.instance)
@@ -12,9 +13,12 @@ module EarthTools
     end
   end
   
+  ##
+  # The singleton that maintains the configuration settings for plugin.
   class Configuration
     include Singleton
     
+    # The available options
     OPTIONS = [
       :timeout,
       :proxy,
@@ -30,7 +34,8 @@ module EarthTools
       set_defaults
     end
     
-    # This method will set the configuration options to the default values
+    ##
+    # Sets the configuration options to the default values
     def set_defaults
       @timeout      = 3               # Geocoding service timeout (secs)
       @proxy        = nil             # HTTP proxy server (user:pass@host:port)
@@ -62,7 +67,7 @@ module EarthTools
     end.join("\n\n"))
     
     class << self
-      # This method will set the configuration options to the default values
+      # Sets the configuration options to the default values
       def set_defaults
         instance.set_defaults
       end

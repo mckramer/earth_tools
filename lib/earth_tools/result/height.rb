@@ -4,10 +4,9 @@ require 'earth_tools/configuration'
 module EarthTools::Result
   
   ##
-  #
-  #  
+  # The height result.
   class Height < Base
-
+    
     ##
     # Returns height based on unit requested in configuration
     # @return [float] 
