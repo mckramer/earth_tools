@@ -60,8 +60,8 @@ The run down of the 3 major functions available
     # Configure block (set to defaults)
     EarthTools.configure do |config|
       config.always_raise = []              # Add any errors that you would like to be custom handled, see "Error handling" section below
-      config.cache = nil                    # Cache object (must respond to #[], #[]=, and #keys)
-      config.cache_prefix = "earth_tools:"   # Prefix to all cache keys
+      config.cache = nil                    # Cache object (see Caching section for what methods are required)
+      config.cache_prefix = "earth_tools:"  # Prefix to use for cache keys
       config.timeout = 3                    # Timeout in seconds
       config.units = :english               # Also, can specify :metric
     end
@@ -78,7 +78,7 @@ Earth Tools imposes some [usage restrictions](http://www.earthtools.org/webservi
 2. You *must* cache results if you believe that you will need to make another identical request within any 24-hour period.
 3. You *must* delete any cached data when you no longer need it and in any case after 14 days. You should then make a new request for the data in line with the previous two rules. If you wish to keep access to data I am able to license the data for use in this way.
 
-### Caching (*Future feature*)
+### Caching
 
 It is recommended to cache retrieved data when relying on an external service. You can configure a cache store:
 
@@ -92,13 +92,22 @@ The cache store can be any object that supports the following methods:
         <th>Method</th><th>Description</th><th>Examples</th>
     </tr>
     <tr>
-        <td><code>store#[](key)</code></td><td>Retrieves a value by with the key</td><td></td>
+        <td><code>#[](key)</code></td><td>Retrieves a value by with the key</td><td></td>
     </tr>
     <tr>
-        <td><code>store#[]=(key, value)</code></td><td>Stores a value with the key</td><td></td>
+        <td><code>#[]=(key, value)</code></td><td>Stores a value with the key</td><td></td>
     </tr>
     <tr>
-        <td><code>store#keys</code></td><td>Retrieves all keys</td><td></td>
+        <td><code>#keys</code></td><td>Retrieves all keys</td><td></td>
+    </tr>
+    <tr>
+        <td>
+            <div><code>#del</code></div>
+            <div>or</div>
+            <div><code>#delete</code></div>
+        </td>
+        <td>Deletes a key</td>
+        <td></td>
     </tr>
 </table>
 

@@ -29,24 +29,23 @@ module EarthTools
     def initialize  # :nodoc
       set_defaults
     end
-
+    
     # This method will set the configuration options to the default values
     def set_defaults
-      @timeout      = 3               # geocoding service timeout (secs)
+      @timeout      = 3               # Geocoding service timeout (secs)
       @proxy        = nil             # HTTP proxy server (user:pass@host:port)
-      @cache        = nil             # cache object (must respond to #[], #[]=, and #keys)
-      @cache_prefix = "earth_tools:"  # prefix (string) to use for all cache keys
-
-      # exceptions that should not be rescued by default
+      @cache        = nil             # Cache object (must respond to #[], #[]=, #keys, and #delete)
+      @cache_prefix = "earth_tools:"  # Prefix (string) to use for all cache keys
+      
+      # Exceptions that should not be rescued by default
       # (if you want to implement custom error handling);
       # supports SocketError and Timeout::Error
       @always_raise = []
-
-      # calculation options
+      
+      # Calculation options
       @units     = :english # :metric or :english
     end
     
-
     # Delegates getters and setters for all configuration settings,
     # and +set_defaults+ to the singleton instance.
     instance_eval(OPTIONS.map do |option|
@@ -55,13 +54,13 @@ module EarthTools
       def #{o}
         instance.#{o}
       end
-
+      
       def #{o}=(value)
         instance.#{o} = value
       end
       EOS
     end.join("\n\n"))
-
+    
     class << self
       # This method will set the configuration options to the default values
       def set_defaults
