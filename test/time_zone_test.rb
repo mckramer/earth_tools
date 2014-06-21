@@ -57,4 +57,9 @@ class TimeZoneTest < MiniTest::Unit::TestCase
     assert_equal Time.utc(2012, 6, 14, 18, 29, 6), @result.utc_time, 'UTC time was not parsed correctly'
   end
   
+  def test_dst_parsed_correctly
+    assert_equal 'Unknown', @result.dst, 'DST was not parsed correctly'
+    assert_nil @result.dst?, 'DST? should return nil when DST is unknown'
+  end
+  
 end

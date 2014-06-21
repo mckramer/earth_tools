@@ -19,7 +19,7 @@ module EarthTools::Result
     # Whether or not the {#local_time} and {#iso_time} is currently in DST
     # @return [boolean] true || false || nil
     def dst?
-      case @data['dst']
+      case dst
       when 'True' then 
         true
       when 'False'
