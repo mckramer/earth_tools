@@ -16,7 +16,7 @@ class EarthTools::Lookup::Base
   #
   def retrieve(query)
     query = query.split('/')
-    read_fixture "#{ query[3] }_(#{ query[4, query.size-1].join(',') }).xml"
+    read_fixture "#{ query[3] }/#{ query[4, query.size-1].join(',') }.xml"
   end
   
 end
