@@ -1,11 +1,11 @@
 ﻿# earth_tools
-[![Gem Version](https://badge.fury.io/rb/earth_tools.png)](http://badge.fury.io/rb/earth_tools) [![Dependency Status](https://gemnasium.com/mckramer/earth_tools.png?travis)](https://gemnasium.com/mckramer/earth_tools) [![Code Climate](https://codeclimate.com/github/mckramer/earth_tools.png)](https://codeclimate.com/github/mckramer/earth_tools) [![Build Status](https://secure.travis-ci.org/mckramer/earth_tools.png?branch=master)](http://travis-ci.org/mckramer/earth_tools)
+[![Gem Version](https://badge.fury.io/rb/earth_tools.png)](http://badge.fury.io/rb/earth_tools) [![Dependency Status](https://gemnasium.com/mckramer/earth_tools.png?travis)](https://gemnasium.com/mckramer/earth_tools) [![Code Climate](https://codeclimate.com/github/mckramer/earth_tools.png)](https://codeclimate.com/github/mckramer/earth_tools) [![Coverage Status](https://img.shields.io/coveralls/mckramer/earth_tools.svg)](https://coveralls.io/r/mckramer/earth_tools?branch=master) [![Build Status](https://secure.travis-ci.org/mckramer/earth_tools.png?branch=master)](http://travis-ci.org/mckramer/earth_tools)
 
 `earth_tools` is a wrapper around the wonderful [earthtools.org webservices](http://www.earthtools.org/webservices.htm), which allows you to determine the sea level height, time zone, and surise/sunset times from a set of coordinates.
 
 ## Compatibility
 
-* Supports Ruby 1.9.2 & 1.9.3
+* Supports Ruby 1.9.2, 1.9.3, & 2.0.0
 
 Will be testing on other versions in the future.
 
@@ -13,12 +13,16 @@ Will be testing on other versions in the future.
 
 Add to your Gemfile:
 
-  `gem 'earth_tools'`
+```ruby
+gem 'earth_tools'
+```
 
-and then bundle your gemfile:
+and then run bundle:
 
-  `bundle install`
-  
+```sh
+$ bundle install
+```
+
 and you are done!
 
 ## API
@@ -27,45 +31,53 @@ The run down of the 3 major functions available
 
 ### Time zone
 
-    # API
-    result = EarthTools.time_zone(latitude, longitude)
-    # Example
-    result = EarthTools.time_zone(40.71417, -74.00639) # New York City
-    result.iso_time   # => 2012-06-14 12:56:40 -0500
-    result.utc_offset # => -5
-    result.utc_time   # => 2012-06-14 17:56:40 +0000
+```ruby
+# API
+result = EarthTools.time_zone(latitude, longitude)
+# Example
+result = EarthTools.time_zone(40.71417, -74.00639) # New York City
+result.iso_time   # => 2012-06-14 12:56:40 -0500
+result.utc_offset # => -5
+result.utc_time   # => 2012-06-14 17:56:40 +0000
+```
 
 ### Height above/below sea level
 
-    # API
-    result = EarthTools.height(latitude, longitude)
-    # Example
-    result = EarthTools.height(52.4822, -1.8946) # Birmingham, AL
-    result.meters # => 141
-    result.feet   # => 462.6
-    result.height # => 462.6 (when EarthTools::Configuration.units is set to :english units)
+```ruby
+# API
+result = EarthTools.height(latitude, longitude)
+# Example
+result = EarthTools.height(52.4822, -1.8946) # Birmingham, AL
+result.meters # => 141
+result.feet   # => 462.6
+result.height # => 462.6 (when EarthTools::Configuration.units is set to :english units)
+```
 
 ### Sunrise/sunset times
 
-    # API
-    result = EarthTools.sunrise_sunset(latitude, longitude, month, day, timezone, dst)
-    # Example
-    result = EarthTools.sunrise_sunset(40.71417, -74.00639, 12, 4, -5, 0) # New York City, December 4th
-    result.sunrise     # => 2012-12-04 07:05:50 -0500
-    result.sunset      # => 2012-12-04 16:26:59 -0500
+```ruby
+# API
+result = EarthTools.sunrise_sunset(latitude, longitude, month, day, timezone, dst)
+# Example
+result = EarthTools.sunrise_sunset(40.71417, -74.00639, 12, 4, -5, 0) # New York City, December 4th
+result.sunrise     # => 2012-12-04 07:05:50 -0500
+result.sunset      # => 2012-12-04 16:26:59 -0500
+```
 
 ### Configuration
 
-    # Configure block (set to defaults)
-    EarthTools.configure do |config|
-      config.always_raise = []              # Add any errors that you would like to be custom handled, see "Error handling" section below
-      config.cache = nil                    # Cache object (see Caching section for what methods are required)
-      config.cache_prefix = "earth_tools:"  # Prefix to use for cache keys
-      config.timeout = 3                    # Timeout in seconds
-      config.units = :english               # Also, can specify :metric
-    end
-    # Static call
-    EarthTools::Configuration.timeout = 5   # Set timeout to 5 seconds
+```ruby
+# Configure block (set to defaults)
+EarthTools.configure do |config|
+  config.always_raise = []              # Add any errors that you would like to be custom handled, see "Error handling" section below
+  config.cache = nil                    # Cache object (see Caching section for what methods are required)
+  config.cache_prefix = "earth_tools:"  # Prefix to use for cache keys
+  config.timeout = 3                    # Timeout in seconds
+  config.units = :english               # Also, can specify :metric
+end
+# Static call
+EarthTools::Configuration.timeout = 5   # Set timeout to 5 seconds
+```
 
 ## Earth Tool API restrictions
 
@@ -112,8 +124,10 @@ The cache store can be any object that supports the following methods:
 
 If you need to expire cached content:
 
-    EarthTools.cache.expire("http://...") # Expire cached result for a URL
-    EarthTools.cache.expire(:all)         # Expire all cached results
+```ruby
+EarthTools.cache.expire("http://...") # Expire cached result for a URL
+EarthTools.cache.expire(:all)         # Expire all cached results
+```
 
 There is no need to include the prefix when passing a URL to be expired. Expiring `:all` will only expire keys with the configured prefix (won't kill every entry in your key/value store).
 
@@ -121,16 +135,16 @@ There is no need to include the prefix when passing a URL to be expired. Expirin
 
 By default Earth Tools will rescue any exceptions raised by calls to the webservice and return an empty array (using warn() to inform you of the error). You can override this and implement custom error handling for certain exceptions by using the `:always_raise` option:
 
-    EarthTools::Configuration.always_raise = [SocketError, TimeoutError]
+```ruby
+EarthTools::Configuration.always_raise = [SocketError, TimeoutError]
+```
 
 ## Issues & contributing
 
-No outstanding issues right now.  Please post any issues to the [issues queue on github](https://github.com/mckramer/earth_tools/issues).
-
-## Future
-
-I would love to see this functionality brought into the `geocoder` gem or similar in the future.
+Please post any issues to the [issues queue on github](https://github.com/mckramer/earth_tools/issues).
 
 # License and attributions
 
-This gem's structure and design borrows heavily from `geocoder`, so thanks to its author.  Find me on twitter [@maxckramer](https://twitter.com/maxckramer).
+This gem's structure and design borrows heavily from [geocoder](https://github.com/alexreisner/geocoder), so thanks to its author. This repository is released under the MIT license (see the [LICENSE](LICENSE) for full text).
+
+Find me on twitter [@maxckramer](https://twitter.com/maxckramer).
