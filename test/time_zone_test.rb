@@ -10,56 +10,63 @@ require 'mock_lookup'
 class TimeZoneTest < MiniTest::Unit::TestCase
   
   def setup
-    @result = EarthTools.time_zone(40.71417, -74.00639)
+    @result  = EarthTools.time_zone(40.71417, -74.00639)
+    @result2 = EarthTools.time_zone(40.71655, -12.12318)
+    @result3 = EarthTools.time_zone(50.21655, -54.87656)
   end
   
-  def test_time_zone_method_returns_result_object
-    assert @result.is_a?(EarthTools::Result::TimeZone), 'Result should be a time zone object'
+  def test_time_zone_returns_result
+    assert_instance_of EarthTools::Result::TimeZone, @result
   end
   
-  def test_iso_time_is_time
-    assert @result.iso_time.is_a?(Time), 'ISO time should be a time object'
+  def test_iso_time
+    iso_time = @result.iso_time
+    
+    assert_instance_of Time, iso_time
+    assert_equal Time.new(2012, 6, 14, 13, 29, 6, '-05:00'), iso_time
   end
   
-  def test_iso_time_parsed_correctly
-    assert_equal Time.new(2012, 6, 14, 13, 29, 6, '-05:00'), @result.iso_time, 'ISO time was not parsed correctly'
+  def test_local_time
+    local_time = @result.local_time
+    
+    assert_instance_of Time, local_time
+    assert_equal Time.new(2012, 6, 14, 13, 29, 6, '-05:00'), local_time
   end
   
-  def test_local_time_is_time
-    assert @result.local_time.is_a?(Time), 'Local time should be a time object'
+  def test_suffix
+    suffix = @result.suffix
+    
+    assert_instance_of String, suffix
+    assert_equal 'R', suffix
   end
   
-  def test_local_time_parsed_correctly
-    assert_equal Time.new(2012, 6, 14, 13, 29, 6, '-05:00'), @result.local_time, 'Local time was not parsed correctly'
+  def test_utc_offset
+    utc_offset = @result.utc_offset
+    
+    assert_kind_of Integer, utc_offset
+    assert_equal -5, utc_offset
   end
   
-  def test_suffix_is_string
-    assert @result.suffix.is_a?(String), 'Suffix should be a string'
+  def test_utc_time
+    utc_time = @result.utc_time
+    
+    assert_instance_of Time, utc_time
+    assert_equal Time.utc(2012, 6, 14, 18, 29, 6), utc_time
   end
   
-  def test_suffix_parsed_correctly
-    assert_equal 'R', @result.suffix, 'Suffix was not parsed correctly'
+  def test_dst_as_true
+    assert_equal 'True', @result2.dst
+    assert @result2.dst?
   end
   
-  def test_utc_offset_is_integer
-    assert @result.utc_offset.is_a?(Integer), 'UTC offset should be an integer'
+  def test_dst_as_false
+    assert_equal 'False', @result3.dst
+    refute @result3.dst?
   end
   
-  def test_utc_offset_parsed_correctly
-    assert_equal -5, @result.utc_offset, 'UTC offset was not parsed correctly'
-  end
-  
-  def test_utc_time_is_time
-    assert @result.utc_time.is_a?(Time), 'UTC time should be a time object'
-  end
-  
-  def test_utc_time_parsed_correctly
-    assert_equal Time.utc(2012, 6, 14, 18, 29, 6), @result.utc_time, 'UTC time was not parsed correctly'
-  end
-  
-  def test_dst_parsed_correctly
-    assert_equal 'Unknown', @result.dst, 'DST was not parsed correctly'
-    assert_nil @result.dst?, 'DST? should return nil when DST is unknown'
+  def test_dst_as_unknown
+    assert_equal 'Unknown', @result.dst
+    assert_nil @result.dst?
   end
   
 end

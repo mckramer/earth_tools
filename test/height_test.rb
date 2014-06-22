@@ -13,26 +13,22 @@ class HeightTest < MiniTest::Unit::TestCase
     @result = EarthTools.height(52.4822, -1.8946)
   end
   
-  def test_height_is_float
-    assert @result.height.is_a?(Float), 'Height should be a float'
+  # @see configuration_test.rb for tests for height configuration
+  def test_height
+    assert_instance_of Float, @result.height
   end
   
-  # Tests for height configuration in configuration_test.rb
-  
-  def test_feet_is_float
-    assert @result.feet.is_a?(Float), 'Feet should be a float'
+  def test_feet
+    feet = @result.feet
+    assert_instance_of Float, feet
+    assert_equal 462.6, feet
   end
   
-  def test_feet_parsed_correctly
-    assert_equal 462.6, @result.feet, 'Feet was not parsed correctly'
-  end
-  
-  def test_meters_is_float
-    assert @result.meters.is_a?(Float), 'Meters should be a float'
-  end
-  
-  def test_meters_parsed_correctly
-    assert_equal 141, @result.meters, 'Meters was not parsed correctly'
+  def test_meters
+    meters = @result.meters
+    
+    assert_instance_of Float, meters
+    assert_equal 141, meters
   end
   
 end

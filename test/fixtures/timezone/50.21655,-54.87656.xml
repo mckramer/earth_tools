@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<timezone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.earthtools.org/timezone-1.1.xsd">
+  <version>1.1</version>
+  <location>
+    <latitude>40.71655</latitude>
+    <longitude>-12.12318</longitude>
+  </location>
+  <offset>-5</offset>
+  <suffix>R</suffix>
+  <localtime>14 Jun 2012 13:29:06</localtime>
+  <isotime>2012-06-14 13:29:06 -0500</isotime>
+  <utctime>2012-06-14 18:29:06</utctime>
+  <dst>False</dst>
+</timezone>

@@ -16,7 +16,7 @@ class CacheTest < MiniTest::Unit::TestCase
   def test_store_and_retrieve_from_cache
     @cache['test/1'] = :data
     
-    assert_equal :data, @cache['test/1'], 'The cache was not stored properly.'
+    assert_equal :data, @cache['test/1']
   end
   
   def test_remove_single_url
@@ -25,16 +25,16 @@ class CacheTest < MiniTest::Unit::TestCase
     
     @cache.expire('test/1')
     
-    assert_nil @cache['test/1'], 'The cache should have deleted entry.'
-    assert_equal :data, @cache['test/2'], 'The cache should not have deleted entry.'
+    assert_nil @cache['test/1']
+    assert_equal :data, @cache['test/2']
   end
   
   def test_remove_all_prefixed_urls
     @raw_cache['test']        = :data
     @raw_cache['other:test']  = :data
-    @cache['test/1'] = :data
-    @cache['test/2'] = :data
-    @cache['test/3'] = :data
+    @cache['test/1']          = :data
+    @cache['test/2']          = :data
+    @cache['test/3']          = :data
     
     @cache.expire(:all)
     assert_equal :data, @raw_cache['test'], 'The cache should not affect non-prefixed entries.'

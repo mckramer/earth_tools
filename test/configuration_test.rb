@@ -7,45 +7,32 @@ class ConfigurationTest < MiniTest::Unit::TestCase
     EarthTools::Configuration.set_defaults
   end
   
-  # --- class method configuration ---
-  def test_configurated_by_class_method
+  def test_configure_by_class_method
     EarthTools::Configuration.units = :metric
-    assert_equal EarthTools::Configuration.units, :metric
+    assert_equal :metric, EarthTools::Configuration.units
+    
     result = EarthTools.height(52.4822, -1.8946)
-    if result.height == 0
-      assert_equal result.height, result.feet
-    else
-      refute_equal result.height, result.feet
-    end
+    refute_equal result.height, result.feet
   end
   
-  # --- EarthTools#configure distances configuration ---
-  def test_configuration
-    
-    # DSL
+  def test_block_configuration
     EarthTools.configure do |config|
       config.units  = :metric
     end
+    assert_equal :metric, EarthTools::Configuration.units
     
-    assert_equal EarthTools::Configuration.units, :metric
     result = EarthTools.height(52.4822, -1.8946)
-    if result.height == 0
-      assert_equal result.height, result.feet
-    else
-      refute_equal result.height, result.feet
-    end
+    refute_equal result.height, result.feet
     
-    # Direct
+  end
+  
+  def test_property_configuration
     EarthTools.configure.units  = :metric
+    assert_equal :metric, EarthTools::Configuration.units
     
-    assert_equal EarthTools::Configuration.units, :metric
     result = EarthTools.height(52.4822, -1.8946)
     assert_equal result.height, result.meters
-    if result.height == 0
-      assert_equal result.height, result.feet
-    else
-      refute_equal result.height, result.feet
-    end
+    refute_equal result.height, result.feet
   end
   
 end

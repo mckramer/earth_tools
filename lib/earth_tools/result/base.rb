@@ -28,7 +28,7 @@ module EarthTools
       # See {http://en.wikipedia.org/wiki/Latitude}.
       # @return [Float] the latitude
       def latitude
-        @data['latitude'].to_f
+        @data['location']['latitude'].to_f
       end
       
       ##
@@ -36,7 +36,7 @@ module EarthTools
       # See {http://en.wikipedia.org/wiki/Longitude}.
       # @return the longitude
       def longitude
-        @data['longitude'].to_f
+        @data['location']['longitude'].to_f
       end
       
       ##
