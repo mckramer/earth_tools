@@ -22,7 +22,8 @@ Gem::Specification.new do |gem|
   gem.license     = "MIT"
   
   gem.files = FileList['README.md', 'CHANGELOG.md', 'Gemfile', 'Rakefile', 'lib/**/*.rb', 'test/**/*'].to_a
-  gem.add_runtime_dependency "rest-client", "~> 1.6.1"
+  gem.add_runtime_dependency "rest-client", "~> 1.7.3"
   gem.add_runtime_dependency "xml-simple", "~> 1.1.1"
-  
+
+  gem.required_ruby_version = '>= 1.9.3'
 end
